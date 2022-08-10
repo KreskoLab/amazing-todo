@@ -10,6 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix"
   },
   "dependencies": {
+    "pinia": "^2.0.18",
     "vue": "^3.2.37"
   },
   "devDependencies": {
@@ -17,6 +18,7 @@
     "eslint": "^8.0.1",
     "eslint-config-custom": "*",
     "prettier-config-custom": "*",
+    "sass": "^1.54.4",
     "tsconfig": "*",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
