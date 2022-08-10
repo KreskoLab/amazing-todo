@@ -8,6 +8,11 @@ import { Todo } from './schemas/todo.schema';
 export class AppController {
 	constructor(private readonly appService: AppService) {}
 
+	@Get()
+	getAll(): Promise<Todo[]> {
+		return this.appService.findAll()
+	}
+
 	@Post()
 	create(@Body() dto: CreateTodoDto): Promise<Todo> {
 		return this.appService.create(dto)
