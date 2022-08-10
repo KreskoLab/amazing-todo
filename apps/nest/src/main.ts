@@ -8,7 +8,10 @@ async function bootstrap() {
 	const configService = app.get<ConfigService>(ConfigService);
 
 	app.useGlobalPipes(new ValidationPipe());
-	
+	app.enableCors({
+		origin: configService.get<string>('FRONTEND_URL'),
+	});
+
 	await app.listen(configService.get<number>('PORT') || 8000);
 }
 bootstrap();
