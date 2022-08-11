@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "my-amazing-todo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -7,6 +7,8 @@
     "packages/*"
   ],
   "scripts": {
+    "start:nest": "turbo run deploy --filter=nest",
+    "start:vite": "turbo run deploy --filter=vite",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
@@ -15,9 +17,6 @@
     "dev:nest": "yarn workspace nest start:dev"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.33.0",
-    "@vue/eslint-config-typescript": "^11.0.0",
     "prettier": "^2.6.0",
     "turbo": "latest"
   },
