@@ -6,7 +6,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo, TodoDocument } from './schemas/todo.schema';
 
 @Injectable()
-export class AppService {
+export class TodoService {
 	constructor(@InjectModel(Todo.name) private todoModel: Model<TodoDocument>) {}
 
 	public async findAll(): Promise<Todo[]> {
