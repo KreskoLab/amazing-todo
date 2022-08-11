@@ -12,7 +12,7 @@ module.exports = {
     'prettier',
   ],
   rules: {
-    "indent": ["error", "tab"],
+    "indent": ["error", "tab", { "ignoredNodes": ["PropertyDefinition"] }],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
