@@ -48,7 +48,7 @@ defineProps<{
 
 .list {
 	max-height: 212px;
-	width: 605px;
+	width: variables.$width + 5px;
 	flex-grow: 0;
 
 	overflow-y: scroll;
