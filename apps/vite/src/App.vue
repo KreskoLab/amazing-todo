@@ -115,6 +115,10 @@ header {
 	gap: 20px;
 	overflow-y: auto;
 
+	.list {
+		max-height: calc(100% - 140px) !important;
+	}
+
 	@include xs {
 		height: 100% !important;
 
