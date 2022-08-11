@@ -5753,13 +5753,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"my-turborepo@workspace:.":
+"my-amazing-todo@workspace:.":
   version: 0.0.0-use.local
-  resolution: "my-turborepo@workspace:."
+  resolution: "my-amazing-todo@workspace:."
   dependencies:
-    "@typescript-eslint/eslint-plugin": ^5.33.0
-    "@typescript-eslint/parser": ^5.33.0
-    "@vue/eslint-config-typescript": ^11.0.0
     prettier: ^2.6.0
     turbo: latest
   languageName: unknown
