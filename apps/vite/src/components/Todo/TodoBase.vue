@@ -70,7 +70,6 @@ const activeVariant = computed<Props['variant']>(() => {
 
 .wrapper {
 	position: relative;
-	width: 100%;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	border: 2px solid transparent;
