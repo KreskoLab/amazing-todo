@@ -59,7 +59,7 @@ const activeVariant = computed<Props['variant']>(() => {
 }
 
 .transparent {
-	border-color: variables.$todo-add-default-border !important;
+	border-color: variables.$bg-basic-70 !important;
 	background-color: transparent;
 }
 
