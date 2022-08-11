@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -10,16 +10,21 @@ export class AppController {
 
 	@Get()
 	getAll(): Promise<Todo[]> {
-		return this.appService.findAll()
+		return this.appService.findAll();
 	}
 
 	@Post()
 	create(@Body() dto: CreateTodoDto): Promise<Todo> {
-		return this.appService.create(dto)
+		return this.appService.create(dto);
 	}
 
 	@Put(':id')
 	update(@Param('id') id: string, @Body() dto: UpdateTodoDto): Promise<Todo> {
-		return this.appService.update(id, dto)
+		return this.appService.update(id, dto);
+	}
+
+	@Delete(':id')
+	remove(@Param('id') id: string): Promise<Todo> {
+		return this.appService.remove(id);
 	}
 }
