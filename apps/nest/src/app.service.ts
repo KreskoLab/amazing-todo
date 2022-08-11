@@ -10,14 +10,18 @@ export class AppService {
 	constructor(@InjectModel(Todo.name) private todoModel: Model<TodoDocument>) {}
 
 	public async findAll(): Promise<Todo[]> {
-		return this.todoModel.find({}).select({ __v: 0 })
+		return this.todoModel.find({}).select({ __v: 0 });
 	}
 
 	public async create(dto: CreateTodoDto): Promise<Todo> {
-		return this.todoModel.create(dto)
+		return this.todoModel.create(dto);
 	}
 
 	async update(id: string, dto: UpdateTodoDto): Promise<Todo> {
-		return this.todoModel.findByIdAndUpdate(id, { ...dto }, { new: true })
+		return this.todoModel.findByIdAndUpdate(id, { ...dto }, { new: true });
+	}
+
+	async remove(id: string): Promise<Todo> {
+		return this.todoModel.findByIdAndRemove(id);
 	}
 }
