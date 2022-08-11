@@ -7,14 +7,16 @@
     "packages/*"
   ],
   "scripts": {
-    "start:nest": "turbo run deploy --filter=nest",
-    "start:vite": "turbo run deploy --filter=vite",
+    "deploy:nest": "turbo run deploy --filter=nest",
+    "deploy:vite": "turbo run deploy --filter=vite",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,vue}\"",
     "dev:vite": "yarn workspace vite dev",
-    "dev:nest": "yarn workspace nest start:dev"
+    "dev:nest": "yarn workspace nest start:dev",
+    "start:vite": "yarn workspace vite preview",
+    "start:nest": "yarn workspace nest start"
   },
   "devDependencies": {
     "prettier": "^2.6.0",
