@@ -1,0 +1,7 @@
+$screen-xs-max: 599px;
+
+@mixin xs {
+  @media screen and (max-width: #{$screen-xs-max}) {
+    @content;
+  }
+}
