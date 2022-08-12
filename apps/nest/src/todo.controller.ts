@@ -3,7 +3,7 @@ import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo } from './schemas/todo.schema';
-import { ParamId } from './dto/param.dto';
+import { ParamsDto } from './dto/params.dto';
 
 @Controller('todos')
 export class TodoController {
@@ -20,12 +20,12 @@ export class TodoController {
 	}
 
 	@Put(':id')
-	update(@Param('id') param: ParamId, @Body() dto: UpdateTodoDto): Promise<Todo> {
-		return this.todoService.update(param.id, dto);
+	update(@Param() params: ParamsDto, @Body() dto: UpdateTodoDto): Promise<Todo> {
+		return this.todoService.update(params.id, dto);
 	}
 
 	@Delete(':id')
-	remove(@Param('id') param: ParamId): Promise<Todo> {
-		return this.todoService.remove(param.id);
+	remove(@Param() params: ParamsDto): Promise<Todo> {		
+		return this.todoService.remove(params.id);
 	}
 }
