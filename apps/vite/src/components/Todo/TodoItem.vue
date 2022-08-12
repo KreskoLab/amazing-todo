@@ -29,6 +29,8 @@ watch(
 	() => edit.active,
 	async (val) => {
 		if (val) {
+			edit.value = props.title;
+
 			await nextTick();
 			input.value?.setFocus();
 		}
