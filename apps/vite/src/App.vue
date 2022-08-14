@@ -2,7 +2,7 @@
 import TodoInput from '@/components/Todo/TodoInput.vue';
 import TodoList from '@/components/Todo/TodoList.vue';
 import AppLabel from '@/components/App/AppLabel.vue';
-import { useTodosStore } from './stores/main';
+import { useTodosStore } from '@/stores/main';
 import { computed, onMounted } from 'vue';
 
 const store = useTodosStore();
@@ -53,11 +53,6 @@ onMounted(async () => await store.fetch());
 @import '@/assets/media.scss';
 @import '@/assets/main.scss';
 
-* {
-	margin: 0;
-	padding: 0;
-}
-
 main {
 	min-height: 100vh;
 	width: 100%;
@@ -75,6 +70,34 @@ hr {
 
 header {
 	width: variables.$width;
+	
+	h1 {
+		font-weight: 700;
+		font-size: 30px;
+		line-height: 36px;
+		text-align: center;
+		color: variables.$bg-basic-70;
+		margin-bottom: 30px;
+	}
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 80px);
+	padding: 40px 0;
+	gap: 20px;
+}
+
+#completed {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	overflow-y: auto;
+
+	.list {
+		max-height: 100% !important;
+	}
 }
 
 @include xs {
@@ -89,42 +112,6 @@ header {
 
 	header {
 		width: 100% !important;
-	}
-}
-
-.container {
-	display: flex;
-	flex-direction: column;
-	height: calc(100vh - 80px);
-	padding: 30px 0;
-	gap: 20px;
-
-	h1 {
-		font-weight: 700;
-		font-size: 30px;
-		line-height: 36px;
-		text-align: center;
-		color: variables.$bg-basic-70;
-		margin-bottom: 30px;
-	}
-}
-
-#completed {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
-	overflow-y: auto;
-
-	.list {
-		max-height: calc(100% - 140px) !important;
-	}
-
-	@include xs {
-		height: 100% !important;
-
-		.list {
-			max-height: calc(100% - 20px) !important;
-		}
 	}
 }
 </style>
