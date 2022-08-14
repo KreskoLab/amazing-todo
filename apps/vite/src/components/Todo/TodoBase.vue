@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { TodoVariant } from '@/types';
 import { computed } from 'vue';
 
 export interface Props {
-	variant: 'base' | 'transparent' | 'active';
+	variant: TodoVariant;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -17,7 +18,6 @@ const activeVariant = computed<Props['variant']>(() => {
 		case 'transparent':
 			return 'transparent';
 
-		case 'base':
 		default:
 			return 'base';
 	}

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { TodoVariant } from '@/types';
 import TodoBase from '@/components/Todo/TodoBase.vue';
 import AppInput from '@/components/App/AppInput.vue';
 
@@ -8,9 +9,9 @@ const emit = defineEmits<{
 }>();
 
 const todo = ref<string>('');
-
 const active = ref<boolean>(false);
-const activeVariant = computed(() => (active.value ? 'active' : 'transparent'));
+
+const activeVariant = computed<TodoVariant>(() => (active.value ? 'active' : 'transparent'));
 
 function addTodo() {
 	emit('input', todo.value);
