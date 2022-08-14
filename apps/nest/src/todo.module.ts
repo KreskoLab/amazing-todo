@@ -4,6 +4,7 @@ import { TodoService } from './todo.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Todo, TodoSchema } from './schemas/todo.schema';
+import { TodoGateway } from './todo.gateway';
 
 @Module({
 	imports: [
@@ -27,6 +28,6 @@ import { Todo, TodoSchema } from './schemas/todo.schema';
 		]),
 	],
 	controllers: [TodoController],
-	providers: [TodoService],
+	providers: [TodoService, TodoGateway],
 })
 export class TodoModule {}
