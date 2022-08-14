@@ -35,22 +35,10 @@ defineProps<{
 @use '@/assets/variables.scss' as variables;
 @import '@/assets/media.scss';
 
-@include xs {
-	.list {
-		width: 100% !important;
-		padding-right: 0 !important;
-
-		&::-webkit-scrollbar {
-			width: 0 !important;
-		}
-	}
-}
-
 .list {
-	max-height: 212px;
+	max-height: calc(variables.$todo-height + variables.$todo-gap) * variables.$todo-list-max-items;
 	width: variables.$width + 5px;
 	flex-grow: 0;
-
 	overflow-y: scroll;
 	overflow-x: hidden;
 	padding-right: 20px;
@@ -60,7 +48,7 @@ defineProps<{
 	}
 
 	li:not(:last-child) {
-		margin-bottom: 10px;
+		margin-bottom: variables.$todo-gap;
 	}
 
 	&::-webkit-scrollbar {
@@ -82,7 +70,18 @@ defineProps<{
 }
 
 .full {
-	max-height: 360px;
+	max-height: 100%;
+}
+
+@include xs {
+	.list {
+		width: 100% !important;
+		padding-right: 0 !important;
+
+		&::-webkit-scrollbar {
+			width: 0 !important;
+		}
+	}
 }
 
 .v-move,
