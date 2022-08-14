@@ -70,7 +70,7 @@ hr {
 
 header {
 	width: variables.$width;
-	
+
 	h1 {
 		font-weight: 700;
 		font-size: 30px;

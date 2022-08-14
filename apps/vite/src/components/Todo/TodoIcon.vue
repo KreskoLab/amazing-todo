@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { inject } from 'vue';
-
 const completed = inject('completed');
 </script>
 
