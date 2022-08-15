@@ -5666,6 +5666,7 @@ __metadata:
   resolution: "miscs@workspace:packages/miscs"
   dependencies:
     tslib: ^2.4.0
+    typescript: ^4.7.4
   languageName: unknown
   linkType: soft
 
@@ -7658,7 +7659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:4.7.4, typescript@npm:^4.3.5, typescript@npm:^4.6.4":
+"typescript@npm:4.7.4, typescript@npm:^4.3.5, typescript@npm:^4.6.4, typescript@npm:^4.7.4":
   version: 4.7.4
   resolution: "typescript@npm:4.7.4"
   bin:
@@ -7668,7 +7669,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.7.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>, typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>, typescript@patch:typescript@^4.7.4#~builtin<compat/typescript>":
   version: 4.7.4
   resolution: "typescript@patch:typescript@npm%3A4.7.4#~builtin<compat/typescript>::version=4.7.4&hash=f456af"
   bin:
@@ -7834,6 +7835,7 @@ __metadata:
     "@vitejs/plugin-vue": ^3.0.0
     eslint: ^8.0.1
     eslint-config-custom: "*"
+    miscs: "*"
     pinia: ^2.0.18
     prettier-config-custom: "*"
     sass: ^1.54.4
