@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { EVENT } from 'miscs';
 import type { Todo, WsResponse } from '@/types';
 
 interface StoreState {
@@ -36,16 +37,16 @@ export const useTodosStore = defineStore('todos', {
 				const { data, event } = JSON.parse(message.data) as WsResponse;
 
 				switch (event) {
-					case 'add':
+					case 'add-todo':
 						this.todos.push(data);
 						break;
 
-					case 'update':
+					case 'update-todo':
 						const index = this.todos.findIndex((todo) => todo._id === data._id);
 						this.todos[index] = data;
 						break;
 
-					case 'remove':
+					case 'remove-todo':
 						this.todos = this.todos.filter((todo) => todo._id !== data._id);
 						break;
 				}
@@ -60,7 +61,7 @@ export const useTodosStore = defineStore('todos', {
 		async add(title: Todo['title']) {
 			this.socket?.send(
 				JSON.stringify({
-					event: 'add-todo',
+					event: EVENT.ADD,
 					data: {
 						title,
 					},
@@ -71,7 +72,7 @@ export const useTodosStore = defineStore('todos', {
 		async update(id: string, payload: Partial<Omit<Todo, '_id' | 'updatedAt'>>) {
 			this.socket?.send(
 				JSON.stringify({
-					event: 'update-todo',
+					event: EVENT.UPDATE,
 					data: {
 						id,
 						...payload,
@@ -83,7 +84,7 @@ export const useTodosStore = defineStore('todos', {
 		async remove(id: string) {
 			this.socket?.send(
 				JSON.stringify({
-					event: 'remove-todo',
+					event: EVENT.REMOVE,
 					data: {
 						id,
 					},

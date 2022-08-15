@@ -14,7 +14,7 @@ import { config } from 'dotenv';
 import { ParamsDto } from './dto/params.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { Todo } from './schemas/todo.schema';
-
+import { EVENT } from 'miscs';
 config();
 
 @WebSocketGateway({ cors: { origin: process.env.FRONTEND_URL } })
@@ -42,24 +42,24 @@ export class TodoGateway implements OnGatewayConnection, OnGatewayDisconnect {
 	}
 
 	@UsePipes(new ValidationPipe())
-	@SubscribeMessage('add-todo')
+	@SubscribeMessage(EVENT.ADD)
 	async addTodo(@MessageBody() dto: CreateTodoDto): Promise<void> {
 		const todo = await this.todoService.create(dto);
-		return this.sendToClients({ event: 'add', data: todo });
+		return this.sendToClients({ event: EVENT.ADD, data: todo });
 	}
 
 	@UsePipes(new ValidationPipe())
-	@SubscribeMessage('update-todo')
+	@SubscribeMessage(EVENT.UPDATE)
 	async updateTodo(@MessageBody() dto: UpdateTodoDto & ParamsDto): Promise<void> {
 		const { id, ...rest } = dto;
 		const todo = await this.todoService.update(id, rest);
-		return this.sendToClients({ event: 'update', data: todo });
+		return this.sendToClients({ event: EVENT.UPDATE, data: todo });
 	}
 
 	@UsePipes(new ValidationPipe())
-	@SubscribeMessage('remove-todo')
+	@SubscribeMessage(EVENT.REMOVE)
 	async removeTodo(@MessageBody() dto: ParamsDto): Promise<void> {
 		const todo = await this.todoService.remove(dto.id);
-		return this.sendToClients({ event: 'remove', data: todo });
+		return this.sendToClients({ event: EVENT.REMOVE, data: todo });
 	}
 }

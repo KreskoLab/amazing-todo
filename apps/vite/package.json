@@ -17,6 +17,7 @@
     "@vitejs/plugin-vue": "^3.0.0",
     "eslint": "^8.0.1",
     "eslint-config-custom": "*",
+    "miscs": "*",
     "prettier-config-custom": "*",
     "sass": "^1.54.4",
     "tsconfig": "*",

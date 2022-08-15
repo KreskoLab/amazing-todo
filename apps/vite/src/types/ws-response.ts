@@ -1,4 +1,4 @@
-import { EVENT } from '@/enums/event';
+import { EVENT } from 'miscs';
 import { Todo } from './todo';
 
 export type WsResponse = {
