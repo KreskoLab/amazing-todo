@@ -16,7 +16,8 @@
     "dev:vite": "yarn workspace vite dev",
     "dev:nest": "yarn workspace nest start:dev",
     "start:vite": "yarn workspace vite preview",
-    "start:nest": "yarn workspace nest start"
+    "start:nest": "yarn workspace nest start",
+    "miscs": "yarn workspace miscs build"
   },
   "devDependencies": {
     "prettier": "^2.6.0",
