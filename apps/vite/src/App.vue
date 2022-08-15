@@ -3,7 +3,7 @@ import TodoInput from '@/components/Todo/TodoInput.vue';
 import TodoList from '@/components/Todo/TodoList.vue';
 import AppLabel from '@/components/App/AppLabel.vue';
 import { useTodosStore } from '@/stores/main';
-import { computed, onMounted } from 'vue';
+import { computed, onBeforeMount, onMounted } from 'vue';
 
 const store = useTodosStore();
 
@@ -13,7 +13,12 @@ const completedTodos = computed(() => store.completed);
 const pendingFull = computed<boolean>(() => !!store.pending.length);
 const completedFull = computed<boolean>(() => !!store.completed.length);
 
-onMounted(async () => await store.fetch());
+onMounted(async () => {
+	await store.fetch();
+	store.openWS();
+});
+
+onBeforeMount(() => store.closeWS());
 </script>
 
 <template>

@@ -1,13 +1,15 @@
 import { defineStore } from 'pinia';
-import type { Todo } from '@/types';
+import type { Todo, WsResponse } from '@/types';
 
 interface StoreState {
 	todos: Todo[];
+	socket: WebSocket | null;
 }
 
 export const useTodosStore = defineStore('todos', {
 	state: (): StoreState => ({
 		todos: [],
+		socket: null,
 	}),
 	getters: {
 		completed: (state) => state.todos.filter((todo) => todo.completed),
@@ -24,68 +26,69 @@ export const useTodosStore = defineStore('todos', {
 				);
 			} catch (error) {
 				this.todos = [];
-				console.log(error);
 			}
+		},
+
+		openWS() {
+			this.socket = new WebSocket(import.meta.env.VITE_WS);
+
+			this.socket.onmessage = (message: MessageEvent) => {
+				const { data, event } = JSON.parse(message.data) as WsResponse;
+
+				switch (event) {
+					case 'add':
+						this.todos.push(data);
+						break;
+
+					case 'update':
+						const index = this.todos.findIndex((todo) => todo._id === data._id);
+						this.todos[index] = data;
+						break;
+
+					case 'remove':
+						this.todos = this.todos.filter((todo) => todo._id !== data._id);
+						break;
+				}
+			};
+		},
+
+		closeWS() {
+			this.socket?.close(1000);
+			this.socket = null;
 		},
 
 		async add(title: Todo['title']) {
-			try {
-				const response = await fetch(`${import.meta.env.VITE_API}/todos`, {
-					method: 'POST',
-					body: JSON.stringify({ title }),
-					headers: {
-						'Content-Type': 'application/json',
+			this.socket?.send(
+				JSON.stringify({
+					event: 'add-todo',
+					data: {
+						title,
 					},
-				});
-
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-
-				const todo = (await response.json()) as Todo;
-				this.todos.unshift(todo);
-			} catch (error) {
-				console.log(error);
-			}
+				}),
+			);
 		},
 
 		async update(id: string, payload: Partial<Omit<Todo, '_id' | 'updatedAt'>>) {
-			try {
-				const response = await fetch(`${import.meta.env.VITE_API}/todos/${id}`, {
-					method: 'PUT',
-					body: JSON.stringify(payload),
-					headers: {
-						'Content-Type': 'application/json',
+			this.socket?.send(
+				JSON.stringify({
+					event: 'update-todo',
+					data: {
+						id,
+						...payload,
 					},
-				});
-
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-
-				const todo = (await response.json()) as Todo;
-				const oldTodo = this.todos.findIndex((todo) => todo._id === id);
-
-				this.todos[oldTodo] = todo;
-			} catch (error) {
-				console.log(error);
-			}
+				}),
+			);
 		},
 
 		async remove(id: string) {
-			try {
-				const response = await fetch(`${import.meta.env.VITE_API}/todos/${id}`, {
-					method: 'DELETE',
-				});
-
-				if (response.status >= 400) {
-					throw new Error('Bad response from server');
-				}
-
-				this.todos = this.todos.filter((todo) => todo._id !== id);
-			} catch (error) {
-				console.log(error);
-			}
+			this.socket?.send(
+				JSON.stringify({
+					event: 'remove-todo',
+					data: {
+						id,
+					},
+				}),
+			);
 		},
 	},
 });
