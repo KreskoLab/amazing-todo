@@ -2,6 +2,15 @@
   "name": "miscs",
   "version": "0.0.0",
   "license": "MIT",
-  "main": "index.js",
-  "types": "index.d.ts"
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist//esm/index.d.ts",
+  "scripts": {
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:esm": "tsc --module es2020 --target es5 --outDir dist/esm",
+    "build:cjs": "tsc --module commonjs --target es5 --outDir dist/cjs"
+  },
+  "dependencies": {
+    "tslib": "^2.4.0"
+  }
 }

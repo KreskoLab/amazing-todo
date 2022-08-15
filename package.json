@@ -8,8 +8,8 @@
   ],
   "scripts": {
     "deploy:nest": "turbo run deploy --filter=nest",
-    "deploy:vite": "turbo run deploy --filter=vite",
-    "build": "turbo run build",
+    "deploy:vite": "turbo run deploy --filter=vite --no-cache",
+    "build": "turbo run build --no-cache",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,vue}\"",
